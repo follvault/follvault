@@ -1,0 +1,694 @@
+/* --- FollVault styles.css (Final Version) --- */
+
+/* --- Google Fonts Import --- */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Poppins:wght@300;400;600&display=swap');
+
+/* --- CSS Variables --- */
+:root {
+    --bg-color: #000000;
+    --text-color: #ffffff;
+    --p-text-color: #ff6677bb;
+    --primary-glow: #ff0033;
+    --bright-glow-text: #ff3355;
+    --subtle-shadow-glow: #ff335533;
+    --box-shadow-glow: #ff1a1a33;
+    --border-glow: #ff336699;
+    --font-heading: 'Orbitron', sans-serif;
+    --font-body: 'Poppins', sans-serif;
+    --header-height: 70px;
+}
+
+/* --- Base & Reset --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+    padding-top: var(--header-height);
+}
+
+/* --- Particle Background --- */
+#particle-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    color: var(--bright-glow-text);
+    text-shadow: 0 0 5px var(--subtle-shadow-glow), 0 0 10px var(--primary-glow);
+    margin-bottom: 1rem;
+}
+
+p {
+    color: var(--p-text-color);
+    margin-bottom: 1rem;
+}
+
+a {
+    color: var(--bright-glow-text);
+    text-decoration: none;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+a:hover {
+    color: var(--primary-glow);
+    text-shadow: 0 0 8px var(--primary-glow);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+    position: relative;
+    z-index: 2;
+}
+
+/* --- Header & Advanced Text Logo --- */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: var(--header-height);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border-glow);
+    z-index: 1000;
+}
+
+.logo-text a {
+    font-family: var(--font-heading);
+    font-weight: 900;
+    font-size: 1.8rem;
+    text-decoration: none;
+    background: linear-gradient(45deg, var(--primary-glow), #ff5577, #ffffff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 10px var(--subtle-shadow-glow);
+    position: relative;
+    overflow: hidden;
+    padding: 5px;
+}
+
+.logo-text a::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -150%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    animation: shine 5s infinite linear;
+}
+
+@keyframes shine {
+    0% { left: -150%; }
+    50% { left: 150%; }
+    100% { left: 150%; }
+}
+
+.main-nav { display: flex; list-style: none; }
+.main-nav ul { display: flex; list-style: none; gap: 1.5rem; }
+.main-nav a { font-family: var(--font-heading); font-size: 1rem; }
+.main-nav a.active { color: var(--primary-glow); text-shadow: 0 0 5px var(--primary-glow); }
+.nav-toggle { display: none; /* ... rest of mobile nav styles */ }
+
+/* --- Footer --- */
+.footer {
+    text-align: center;
+    padding: 2rem 1rem;
+    margin-top: 3rem;
+    border-top: 1px solid var(--border-glow);
+    background: var(--bg-color);
+    position: relative;
+    z-index: 2;
+}
+
+/* --- Cards & Scroll Animation --- */
+.glowing-card {
+    background: rgba(10, 0, 0, 0.5);
+    border: 1px solid var(--border-glow);
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 0 15px var(--box-shadow-glow), inset 0 0 10px var(--box-shadow-glow);
+}
+
+.scroll-fade {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.scroll-fade.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* --- Ad Placements --- */
+.ad-placeholder {
+    border: 1px dashed var(--border-glow);
+    padding: 2rem;
+    text-align: center;
+    color: var(--p-text-color);
+    background: var(--bg-glow);
+    margin: 2rem 0;
+}
+.btn-container {
+  position: relative;
+  display: inline-block;
+}
+
+#btn-particles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.glow-btn {
+  position: middle;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.1rem;
+  padding: 0.8rem 2rem;
+  border: 2px solid var(--border-glow);
+  background: rgba(255, 0, 50, 0.1);
+  color: var(--bright-glow-text);
+  border-radius: 8px;
+  text-shadow: 0 0 5px var(--primary-glow);
+  box-shadow: 0 0 10px var(--box-shadow-glow),
+              inset 0 0 10px var(--box-shadow-glow);
+  cursor: pointer;
+  overflow: hidden;
+  z-index: 2;
+  transition: all 0.3s ease;
+}
+
+.glow-btn:hover {
+  background: var(--primary-glow);
+  color: #fff;
+  box-shadow: 0 0 20px var(--primary-glow), 0 0 40px var(--primary-glow);
+  transform: scale(1.05);
+}
+.btn-wrap {
+  display: inline-block;
+  position: relative;
+  perspective: 1000px; /* for 3D tilt */
+  margin: 16px;
+}
+
+/* ---- Visual button element ---- */
+.neon-btn {
+  --w: 260px;
+  --h: 72px;
+  --radius: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--w);
+  height: var(--h);
+  padding: 0 28px;
+  color: #fff;
+  text-decoration: none;
+  letter-spacing: .6px;
+  font-weight: 600;
+  font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  position: relative;
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.02); /* subtle transparent fill */
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  box-shadow:
+    0 10px 30px rgba(0,0,0,0.55), /* deep shadow for 3D depth */
+    inset 0 1px 0 rgba(255,255,255,0.02);
+  transform-style: preserve-3d;
+  transition: transform 220ms cubic-bezier(.2,.9,.3,1), box-shadow 220ms;
+  user-select: none;
+  overflow: visible;
+}
+
+/* 3D tilt on hover */
+.neon-btn:hover {
+  transform: translateZ(18px) rotateX(6deg) rotateY(-6deg);
+  box-shadow:
+    0 22px 48px rgba(0,0,0,0.65),
+    inset 0 2px 0 rgba(255,255,255,0.03);
+}
+
+/* Transparent red glowing edge (outer stroke rendered behind canvas) */
+.neon-btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px; /* space for outer neon glow line */
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, rgba(255,20,40,0.02), rgba(255,20,40,0.01));
+  box-shadow:
+    0 0 20px rgba(255,20,40,0.08),
+    0 0 42px rgba(255,20,40,0.05); /* faint halo */
+  -webkit-mask: linear-gradient(#000, #000);
+  mask: linear-gradient(#000, #000);
+  mix-blend-mode: screen;
+}
+
+/* sharp neon border: an outer SVG-like stroke look using outline */
+.neon-btn::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:inherit;
+  pointer-events:none;
+  box-shadow: 0 0 12px rgba(255,20,40,0.7), 0 0 30px rgba(255,20,40,0.25);
+  border: 1.4px solid rgba(255,20,40,0.55);
+  mix-blend-mode: screen;
+  transform: translateZ(-1px); /* behind the button face */
+}
+
+/* Canvas sits above the background but below text */
+.neon-canvas {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* allow clicks through the canvas to the <a> */
+  border-radius: inherit;
+  z-index: 2;
+  transform: translateZ(20px); /* match 3D feel */
+}
+
+/* Text sits above canvas */
+.neon-label {
+  position: relative;
+  z-index: 3;
+  mix-blend-mode: screen;
+  text-shadow:
+    0 1px 0 rgba(255,255,255,0.04),
+    0 6px 18px rgba(255,20,40,0.05);
+  font-size: 16px;
+}
+
+/* small responsive tweak */
+@media (max-width:420px){
+  .neon-btn { --w: 220px; --h: 60px; --radius:16px; font-size:15px; }
+}
+/* style.css */
+
+/* ---- Base styles ---- */
+.btn-wrap {
+  display: inline-block;
+  position: relative;
+  perspective: 1000px;
+}
+
+.neon-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 260px;
+  height: 80px;
+  text-decoration: none;
+  border-radius: 22px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 17px;
+  font-weight: 600;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(8px);
+  box-shadow: 
+    0 0 40px rgba(255, 0, 50, 0.15),
+    inset 0 0 20px rgba(255, 0, 50, 0.2);
+  overflow: hidden;
+  transform-style: preserve-3d;
+  transition: all 0.25s cubic-bezier(.2,.9,.3,1);
+}
+
+/* ---- Hover 3D rotation ---- */
+.neon-btn:hover {
+  transform: rotateX(10deg) rotateY(-10deg) translateZ(10px);
+  box-shadow: 
+    0 0 50px rgba(255, 0, 60, 0.3),
+    inset 0 0 25px rgba(255, 0, 60, 0.35);
+}
+
+/* ---- Transparent glowing border ---- */
+.neon-btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 2px solid rgba(255, 0, 50, 0.4);
+  box-shadow: 0 0 25px rgba(255, 0, 50, 0.4);
+  animation: borderGlow 3s infinite alternate;
+}
+
+@keyframes borderGlow {
+  0% { box-shadow: 0 0 10px rgba(255, 0, 50, 0.3); }
+  100% { box-shadow: 0 0 30px rgba(255, 0, 80, 0.6); }
+}
+
+/* ---- Particle canvas ---- */
+.neon-canvas {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  z-index: 1;
+}
+
+/* ---- Button text ---- */
+.neon-text {
+  position: relative;
+  z-index: 2;
+  text-shadow: 
+    0 0 6px rgba(255, 0, 40, 0.6),
+    0 0 16px rgba(255, 0, 80, 0.3);
+  letter-spacing: 1px;
+}
+
+/* ---- Responsive tweak ---- */
+@media (max-width: 480px) {
+  .neon-btn {
+    width: 220px;
+    height: 70px;
+    font-size: 15px;
+  }
+}
+/* fire-button.css */
+
+/* Button wrapper */
+.fire-btn-wrap {
+  display: inline-block;
+  position: relative;
+  perspective: 1000px;
+}
+
+/* Main fire button */
+.fire-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 250px;
+  height: 75px;
+  color: #fff;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 18px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 
+    0 0 20px rgba(255, 0, 0, 0.2),
+    inset 0 0 25px rgba(255, 0, 0, 0.3);
+}
+
+/* Glowing border */
+.fire-btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 2px solid rgba(255, 60, 0, 0.6);
+  border-radius: inherit;
+  box-shadow: 0 0 25px rgba(255, 50, 0, 0.6);
+  animation: fireGlow 2.5s infinite alternate;
+}
+
+@keyframes fireGlow {
+  0% { box-shadow: 0 0 15px rgba(255, 40, 0, 0.4); }
+  100% { box-shadow: 0 0 35px rgba(255, 80, 0, 0.8); }
+}
+
+/* Fire flame background */
+.fire-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  border-radius: inherit;
+}
+
+/* Text above flames */
+.fire-text {
+  position: relative;
+  z-index: 2;
+  font-size: 18px;
+  text-shadow:
+    0 0 10px rgba(255, 80, 0, 0.8),
+    0 0 20px rgba(255, 30, 0, 0.4);
+}
+
+/* Hover effect: tilt and flame burst */
+.fire-btn:hover {
+  transform: translateY(-5px) rotateX(8deg) rotateY(-6deg);
+  box-shadow:
+    0 0 40px rgba(255, 0, 0, 0.4),
+    inset 0 0 35px rgba(255, 0, 0, 0.5);
+}
+
+/* Small responsive adjustment */
+@media (max-width: 480px) {
+  .fire-btn {
+    width: 210px;
+    height: 65px;
+    font-size: 15px;
+  }
+}
+/* metallic-button.css */
+
+/* Page background */
+html, body {
+  height: 100%;
+  margin: 0;
+  background: radial-gradient(circle at top, #0a0a0a, #000);
+  font-family: 'Orbitron', sans-serif;
+  overflow-x: hidden;
+}
+
+/* Metallic Button Styling */
+.metallic-btn {
+  position: fixed;
+  bottom: 60px; /* footer ke upar thoda gap */
+  left: 50%;
+  transform: translateX(-50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 250px;
+  height: 80px;
+  border-radius: 20px;
+  font-size: 20px;
+  color: #fff;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  background: linear-gradient(145deg, #555, #222);
+  box-shadow:
+    inset 2px 2px 8px rgba(255,255,255,0.3),
+    inset -2px -2px 8px rgba(0,0,0,0.8),
+    0 0 25px rgba(255,255,255,0.15);
+  overflow: hidden;
+  transition: all 0.4s ease;
+  perspective: 800px;
+  z-index: 999;
+}
+
+/* Shine reflection */
+.metallic-btn::before {
+  content: "";
+  position: absolute;
+  top: -100%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    120deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.7) 50%,
+    transparent 70%
+  );
+  transform: rotate(25deg);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.metallic-btn:hover::before {
+  animation: shineMove 1.2s ease forwards;
+  opacity: 1;
+}
+
+@keyframes shineMove {
+  0% { transform: translateX(-100%) rotate(25deg); }
+  100% { transform: translateX(100%) rotate(25deg); }
+}
+
+/* Hover glow */
+.metallic-btn:hover {
+  transform: translateX(-50%) scale(1.05);
+  box-shadow:
+    inset 3px 3px 10px rgba(255,255,255,0.25),
+    inset -3px -3px 12px rgba(0,0,0,0.9),
+    0 0 35px rgba(255, 50, 50, 0.4);
+}
+
+.metal-text {
+  position: relative;
+  z-index: 2;
+  text-shadow:
+    0 0 6px rgba(255,255,255,0.3),
+    0 0 12px rgba(255,0,0,0.5);
+}
+
+/* Click pulse animation */
+@keyframes metallicPulse {
+  0% { transform: translateX(-50%) scale(1); box-shadow: 0 0 20px rgba(255,255,255,0.2); }
+  50% { transform: translateX(-50%) scale(1.15); box-shadow: 0 0 60px rgba(255,255,255,0.5); }
+  100% { transform: translateX(-50%) scale(1); box-shadow: 0 0 25px rgba(255,255,255,0.3); }
+}
+
+.metallic-btn.pulse {
+  animation: metallicPulse 0.6s ease-out;
+}
+
+/* === Input Box Style === */
+#order-quantity {
+  width: 80px;
+  padding: 8px 10px;
+  margin-top: 10px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.2rem;
+  text-align: center;
+  color: #fff;
+  background: linear-gradient(145deg, #1a1a1a, #2c2c2c);
+  border: 1px solid #ff0048;
+  border-radius: 10px;
+  box-shadow: 0 0 12px rgba(255, 0, 80, 0.4);
+  transition: all 0.25s ease;
+}
+
+#order-quantity:focus {
+  outline: none;
+  border-color: #ff4f91;
+  box-shadow: 0 0 18px rgba(255, 70, 120, 0.8);
+  transform: scale(1.05);
+}
+
+/* === Proceed Button Style === */
+.btn {
+  position: relative;
+  margin-top: 1rem;
+  background: linear-gradient(145deg, #2b2b2b, #1b1b1b);
+  color: #fff;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+  border: 2px solid #ff0048;
+  border-radius: 12px;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  padding: 10px;
+  letter-spacing: 1px;
+  text-shadow: 0 0 6px rgba(255, 0, 80, 0.6);
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(120deg, rgba(255,255,255,0.2), transparent);
+  transform: skewX(-25deg);
+  transition: all 0.5s ease;
+}
+
+.btn:hover::before {
+  left: 125%;
+}
+
+.btn:hover {
+  background: linear-gradient(145deg, #ff0048, #c60039);
+  color: #fff;
+  border-color: #ff4f91;
+  box-shadow: 0 0 25px rgba(255, 0, 80, 0.8), inset 0 0 10px rgba(255, 0, 80, 0.5);
+  transform: scale(1.04);
+}
+
+.btn:active {
+  transform: scale(0.98);
+  box-shadow: 0 0 15px rgba(255, 0, 80, 0.6);
+}
+
+/* Pay First button style (matches neon/metallic theme) */
+.pay-btn {
+  display: block;
+  width: 100%;
+  margin: 10px 0 6px 0;
+  padding: 10px 14px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #1b0008;
+  background: linear-gradient(180deg, #ff8aa8, #ff2a5a);
+  border: 2px solid rgba(255,20,60,0.95);
+  border-radius: 10px;
+  box-shadow: 0 6px 18px rgba(255, 30, 90, 0.25), inset 0 -2px 8px rgba(0,0,0,0.15);
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
+}
+
+.pay-btn:hover {
+  transform: translateY(-3px);
+  filter: brightness(1.03);
+  box-shadow: 0 10px 30px rgba(255, 40, 100, 0.32), inset 0 -3px 10px rgba(255,255,255,0.06);
+}
+
+.pay-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 6px 14px rgba(255, 40, 100, 0.24);
+}
+
+/* small disabled look */
+.pay-btn[disabled] {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* feedback text */
+#payment-feedback { font-size: 0.9rem; color: #ff9ab0; }
