@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Start Your Order - FollVault</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <canvas id="particle-canvas"></canvas>
+    
+    <!-- Header -->
+    <header class="header">
+        <div class="logo-text"><a href="index.html">FollVault</a></div>
+        <!-- Your navigation links here -->
+    </header>
+
+    <main class="container">
+        <!-- Quantity Popup is now the main content -->
+        <div class="popup-overlay" id="quantity-popup">
+            <div class="popup-content glowing-card scroll-fade">
+    <h2 style="text-align:center;">Start Your Order</h2>
+    <p style="text-align:center;">Each account you add gets a full combo pack for just ₹1. Tap on the "5" to select order quantity.</p>
+    <form id="quantity-form">
+        <div class="form-group">
+            <label for="order-quantity">For a few days, Enter order for max 8 accounts. ⚠</label>
+            <label for="order-quantity"> ‎‎‎‎‎‎‎‎Warned</label>
+            <input type="number" id="order-quantity" class="form-control" min="5" max="50" value="5" required>
+        </div>
+        
+        <button type="button" id="payFirstBtn" class="pay-btn">Pay First</button>
+        
+        <!-- ▼▼▼▼▼ यह लाइन यहाँ जोड़ें ▼▼▼▼▼ -->
+        <p id="payment-feedback" style="text-align:center; color:#ffcc00; height: 20px; margin-top:15px;"></p>
+        <!-- ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲ -->
+
+        <button type="submit" class="btn" style="width:100%;">Proceed</button>
+        
+        <p style="font-size:0.8rem; text-align:center; margin-top:1rem;">Minimum 5, Maximum 50.</p>
+                <p style="font-size:0.8rem; text-align:center; margin-top:1rem;">⚠ Currently we 8+ Orders in same time is impossible for us, We are facing a problem, We expect to fix our issues within a few days.</p>
+    </form>
+</div>
+        </div>
+    </main>
+    <div class="btn-container">
+  <button class="glow-btn" id="particle-btn">
+    Continue </button>
+  <canvas id="btn-particles"></canvas>
+</div>
+      
+    <footer class="footer">
+        <p>© 2025 FollVault | Owner: Imran Khan | Developer: Abrar Khan</p>
+        <!-- other footer content -->
+    </footer>
+    <script src="scripts.js"></script>
+    <script src="order.js"></script>
+    <script>
+const canvas = document.getElementById('btn-particles');
+const ctx = canvas.getContext('2d');
+const button = document.getElementById('particle-btn');
+
+let particles = [];
+let w, h;
+
+function resize() {
+  const rect = button.getBoundingClientRect();
+  canvas.width = rect.width;
+  canvas.height = rect.height;
+  w = rect.width;
+  h = rect.height;
+}
+window.addEventListener('resize', resize);
+resize();
+
+class Particle {
+  constructor(x, y, color, auto = false) {
+    this.x = x;
+    this.y = y;
+    this.size = Math.random() * 2 + 0.5;
+    this.speedX = auto ? (Math.random() - 0.5) * 0.5 : (Math.random() - 0.5) * 5;
+    this.speedY = auto ? (Math.random() - 0.5) * 0.5 : (Math.random() - 0.5) * 5;
+    this.color = color;
+    this.alpha = auto ? Math.random() * 0.8 + 0.2 : 1;
+    this.life = auto ? Math.random() * 150 + 100 : 80;
+    this.auto = auto;
+  }
+  update() {
+    this.x += this.speedX;
+    this.y += this.speedY;
+    this.life--;
+    if (!this.auto) this.alpha -= 0.02;
+    if (this.life <= 0) this.alpha = 0;
+  }
+  draw() {
+    ctx.globalAlpha = this.alpha;
+    ctx.fillStyle = this.color;
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.globalAlpha = 1;
+  }
+}
+
+function animate() {
+  ctx.clearRect(0, 0, w, h);
+
+  // ✨ Auto-loop background glow
+  if (Math.random() < 0.3) {
+    const x = Math.random() * w;
+    const y = Math.random() * h;
+    particles.push(new Particle(x, y, 'rgba(255, 50, 80, 0.8)', true));
+  }
+
+  // Update + draw
+  particles.forEach((p, i) => {
+    p.update();
+    p.draw();
+    if (p.alpha <= 0) particles.splice(i, 1);
+  });
+
+  requestAnimationFrame(animate);
+}
+animate();
+
+button.addEventListener('click', (e) => {
+  const rect = button.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+  const y = e.clientY - rect.top;
+
+  // 💥 Burst effect
+  for (let i = 0; i < 30; i++) {
+    particles.push(new Particle(x, y, `hsl(${Math.random() * 20 + 340}, 100%, 60%)`));
+  }
+
+  // ⚙️ Redirect after short delay
+  setTimeout(() => {
+    window.location.href = "https://certainwolveshonestly.com/nmrhxwcg?key=1b0ab4e8b74d1334f5f3221ce74e76c2";
+  }, 900);
+});
+</script>
+</body>
+</html>
