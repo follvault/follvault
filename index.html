@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FollVault Instagram followers at ₹1/-</title>
+    <meta name="description" content="Get 50+ real followers, likes, views, and comments for just ₹1 per pack. The ultimate Instagram growth service.">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="assets/favicon.ico">
+</head>
+<body>
+    <canvas id="particle-canvas"></canvas>
+
+  <header class="header">
+        <div class="logo-text"><a href="index.html"> ⌂   FollVault</a></div>
+        <!-- Your navigation links here -->
+    </header>
+
+
+    <main>
+        <section class="hero container">
+            <h1 class="tagline">Affordable & Real Instagram Growth</h1>
+            <p class="sub-tagline">Get 50+ Followers + 50+ Likes + 50+ Story Views + 70+ Comments on every post → all for just ₹1 per pack. Bulk orders are allowed.</p>
+            <p>⚠ Price can be increase anytime.</p>
+            <div class="btn-container">
+  <button class="glow-btn" id="particle-btn">
+    Continue </button>
+  <canvas id="btn-particles"></canvas>
+</div>
+        </section>
+
+        <div class="ad-placeholder scroll-fade">ADVERTISEMENT PLACEMENT 1</div>
+
+        <section class="container">
+            <h2 style="text-align:center;" class="scroll-fade">Our Core Services in Every Pack</h2>
+            <div class="features-grid">
+                <div class="glowing-card scroll-fade"><h3>+50 Followers</h3><p>Boost your follower count with high-quality profiles.</p></div>
+                <div class="glowing-card scroll-fade" style="transition-delay: 0.1s;"><h3>+50 Likes</h3><p>Increase post engagement and visibility on your posts.</p></div>
+                <div class="glowing-card scroll-fade" style="transition-delay: 0.2s;"><h3>+70 Comments</h3><p>Get relevant and engaging comments to spark conversation.</p></div>
+                <div class="glowing-card scroll-fade" style="transition-delay: 0.3s;"><h3>+50 Story Views</h3><p>Instantly increase your story's reach and popularity.</p></div>
+            </div>
+        </section>
+
+        <div class="ad-placeholder scroll-fade">ADVERTISEMENT PLACEMENT 2</div>
+        <div class="ad-placeholder scroll-fade">ADVERTISEMENT PLACEMENT 3</div>
+
+    </main>
+
+    <footer class="footer">
+        <p>© 2025 FollVault | Owner: Imran Khan</p>
+        <p>
+            <a href="https://wa.me/918143664704" target="_blank">WhatsApp</a> | 
+            <a href="https://instagram.com/follvault/" target="_blank">Instagram</a> |
+            Developed by <a href="https://instagram.com/errrrored/" target="_blank">Abrar Khan</a>
+        </p>
+        <p class="disclaimer">*Results may vary. FollVault is not affiliated with Instagram. Use responsibly.*</p>
+    </footer>
+
+    <script src="scripts.js"></script>
+    <script>
+const canvas = document.getElementById('btn-particles');
+const ctx = canvas.getContext('2d');
+const button = document.getElementById('particle-btn');
+
+let particles = [];
+let w, h;
+
+function resize() {
+  const rect = button.getBoundingClientRect();
+  canvas.width = rect.width;
+  canvas.height = rect.height;
+  w = rect.width;
+  h = rect.height;
+}
+window.addEventListener('resize', resize);
+resize();
+
+class Particle {
+  constructor(x, y, color, auto = false) {
+    this.x = x;
+    this.y = y;
+    this.size = Math.random() * 2 + 0.5;
+    this.speedX = auto ? (Math.random() - 0.5) * 0.5 : (Math.random() - 0.5) * 5;
+    this.speedY = auto ? (Math.random() - 0.5) * 0.5 : (Math.random() - 0.5) * 5;
+    this.color = color;
+    this.alpha = auto ? Math.random() * 0.8 + 0.2 : 1;
+    this.life = auto ? Math.random() * 150 + 100 : 80;
+    this.auto = auto;
+  }
+  update() {
+    this.x += this.speedX;
+    this.y += this.speedY;
+    this.life--;
+    if (!this.auto) this.alpha -= 0.02;
+    if (this.life <= 0) this.alpha = 0;
+  }
+  draw() {
+    ctx.globalAlpha = this.alpha;
+    ctx.fillStyle = this.color;
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.globalAlpha = 1;
+  }
+}
+
+function animate() {
+  ctx.clearRect(0, 0, w, h);
+
+  // ✨ Auto-loop background glow
+  if (Math.random() < 0.3) {
+    const x = Math.random() * w;
+    const y = Math.random() * h;
+    particles.push(new Particle(x, y, 'rgba(255, 50, 80, 0.8)', true));
+  }
+
+  // Update + draw
+  particles.forEach((p, i) => {
+    p.update();
+    p.draw();
+    if (p.alpha <= 0) particles.splice(i, 1);
+  });
+
+  requestAnimationFrame(animate);
+}
+animate();
+
+button.addEventListener('click', (e) => {
+  const rect = button.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+  const y = e.clientY - rect.top;
+
+  // 💥 Burst effect
+  for (let i = 0; i < 30; i++) {
+    particles.push(new Particle(x, y, `hsl(${Math.random() * 20 + 340}, 100%, 60%)`));
+  }
+
+  // ⚙️ Redirect after short delay
+  setTimeout(() => {
+    window.location.href = "about.html";
+  }, 900);
+});
+</script>
+</body>
+</html>
