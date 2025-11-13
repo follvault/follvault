@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms & Conditions - FollVault</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <canvas id="particle-canvas"></canvas>
+    <header class="header">
+        <div class="logo-text"><a href="index.html">FollVault</a></div>
+        <!-- Your navigation links here -->
+    </header>
+
+
+    <main class="container">
+        <section style="padding-top: 2rem;">
+            <h1 style="text-align: center;" class="scroll-fade">Terms & Conditions</h1>
+            <div class="glowing-card scroll-fade" style="max-width: 900px; margin: 1rem auto; text-align: left;">
+                <h3>1. General Use</h3>
+                <p>By placing an order with FollVault, you automatically accept all the below-listed terms of service. We reserve the right to change these terms without notice.</p> </div>
+                <div class="glowing-card scroll-fade" style="max-width: 900px; margin: 1rem auto; text-align: left;">
+                
+                
+                <h3>2. Service Disclaimer</h3>
+                <p>We provide engagement services for social media promotion. FollVault does not guarantee compliance with Instagram’s terms of service. You use our services at your own discretion and risk. We are not responsible for any negative outcomes, including account suspension or content removal.</p>
+</div><div class="glowing-card scroll-fade" style="max-width: 900px; margin: 1rem auto; text-align: left;">
+                
+                <h3>3. Refund Policy</h3>
+                <p>All sales are final. Due to the digital nature of our services, we do not offer refunds or credits once an order is placed and processed. If you experience an issue with your order, contact support, and we will investigate. Incomplete orders will be re-processed or refunded on a case-by-case basis.</p>
+</div><div class="glowing-card scroll-fade" style="max-width: 900px; margin: 1rem auto; text-align: left;">
+                
+                <h3>4. Account Responsibility</h3>
+                <p>You are responsible for ensuring your Instagram account is set to "Public" during the delivery period. We cannot deliver services to private accounts. You also agree not to change your Instagram username until the order is fully delivered.</p>
+            </div>
+            <div class="ad-placeholder scroll-fade">ADVERTISEMENT PLACEMENT 1</div>
+            <div class="ad-placeholder scroll-fade">ADVERTISEMENT PLACEMENT 2</div>
+        </section>
+    </main>
+<div class="btn-container">
+  <button class="glow-btn" id="particle-btn">
+  Continue </button>
+  <canvas id="btn-particles"></canvas>
+</div>
+    <footer class="footer">
+        <p>© 2025 FollVault | Owner: Imran Khan</p>
+        <p>
+            <a href="https://wa.me/918143664704" target="_blank">WhatsApp</a> | 
+            <a href="https://instagram.com/follvault/" target="_blank">Instagram</a> |
+            Developed by <a href="https://instagram.com/errrrored/" target="_blank">Abrar Khan</a>
+        </p>
+        <p class="disclaimer">*Results may vary. FollVault is not affiliated with Instagram. Use responsibly.*</p>
+    </footer>
+
+    <script src="scripts.js"></script>
+    <script>
+const canvas = document.getElementById('btn-particles');
+const ctx = canvas.getContext('2d');
+const button = document.getElementById('particle-btn');
+
+let particles = [];
+let w, h;
+
+function resize() {
+  const rect = button.getBoundingClientRect();
+  canvas.width = rect.width;
+  canvas.height = rect.height;
+  w = rect.width;
+  h = rect.height;
+}
+window.addEventListener('resize', resize);
+resize();
+
+class Particle {
+  constructor(x, y, color, auto = false) {
+    this.x = x;
+    this.y = y;
+    this.size = Math.random() * 2 + 0.5;
+    this.speedX = auto ? (Math.random() - 0.5) * 0.5 : (Math.random() - 0.5) * 5;
+    this.speedY = auto ? (Math.random() - 0.5) * 0.5 : (Math.random() - 0.5) * 5;
+    this.color = color;
+    this.alpha = auto ? Math.random() * 0.8 + 0.2 : 1;
+    this.life = auto ? Math.random() * 150 + 100 : 80;
+    this.auto = auto;
+  }
+  update() {
+    this.x += this.speedX;
+    this.y += this.speedY;
+    this.life--;
+    if (!this.auto) this.alpha -= 0.02;
+    if (this.life <= 0) this.alpha = 0;
+  }
+  draw() {
+    ctx.globalAlpha = this.alpha;
+    ctx.fillStyle = this.color;
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.globalAlpha = 1;
+  }
+}
+
+function animate() {
+  ctx.clearRect(0, 0, w, h);
+
+  // ✨ Auto-loop background glow
+  if (Math.random() < 0.3) {
+    const x = Math.random() * w;
+    const y = Math.random() * h;
+    particles.push(new Particle(x, y, 'rgba(255, 50, 80, 0.8)', true));
+  }
+
+  // Update + draw
+  particles.forEach((p, i) => {
+    p.update();
+    p.draw();
+    if (p.alpha <= 0) particles.splice(i, 1);
+  });
+
+  requestAnimationFrame(animate);
+}
+animate();
+
+button.addEventListener('click', (e) => {
+  const rect = button.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+  const y = e.clientY - rect.top;
+
+  // 💥 Burst effect
+  for (let i = 0; i < 30; i++) {
+    particles.push(new Particle(x, y, `hsl(${Math.random() * 20 + 340}, 100%, 60%)`));
+  }
+
+  // ⚙️ Redirect after short delay
+  setTimeout(() => {
+    window.location.href = "contact.html";
+  }, 900);
+});
+</script>
+</body>
+</html>
